@@ -1,31 +1,29 @@
-import Item from '../models/item';
+import Cart from '../models/cart';
 
-export default class ItemController {
+export default class CartController {
 
   getAll(req, res, next) {
-    Item.find((err, data) => {
+    Cart.find((err, data) => {
       if(err) {
         next(err);
       }
-      res.status(200).send({item:data});
+      res.status(200).send({cart:data});
     })
     }
 
   getOne(req, res, next) {
     const id = req.params.id;
-    Item.findOne({_id: id}, (err, data) => {
+    Cart.findOne({_id: id}, (err, data) => {
       if(err) {
         next(err);
       }
-      res.status(200).send({item:data});
+      res.status(200).send({cart:data});
     })
   }
 
   save(req, res, next) {
     const name = req.params.name;
-    const price = req.params.price;
-    const type = req.params.type;
-     new Item({name: name,price: price,type: type}).save( (err, data) => {
+     new Cart({name:name}).save( (err, data) => {
       if (err) {
         next(err);
       }
@@ -35,7 +33,7 @@ export default class ItemController {
 
   delete(req, res, next) {
     const id = req.params.id;
-    Item.delete({_id: id}, (err, data) => {
+    Cart.delete({_id: id}, (err, data) => {
       if (err) {
         next(err);
       }
@@ -46,8 +44,8 @@ export default class ItemController {
 
   update(req, res, next){
     const id = req.params.id;
-    const price = req.params.price;
-    Item.delete({_id: id, price: price}, (err, data) => {
+    const weight = req.params.weight;
+    Cart.delete({_id: id, weight: weight}, (err, data) => {
       if (err) {
         next(err);
       }

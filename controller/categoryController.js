@@ -1,31 +1,30 @@
-import Item from '../models/item';
+import Category from '../models/category';
 
-export default class ItemController {
+export default class CategoryController {
 
   getAll(req, res, next) {
-    Item.find((err, data) => {
+    Category.find((err, data) => {
       if(err) {
         next(err);
       }
-      res.status(200).send({item:data});
+      res.status(200).send({category:data});
     })
     }
 
   getOne(req, res, next) {
     const id = req.params.id;
-    Item.findOne({_id: id}, (err, data) => {
+    Category.findOne({_id: id}, (err, data) => {
       if(err) {
         next(err);
       }
-      res.status(200).send({item:data});
+      res.status(200).send({category:data});
     })
   }
 
   save(req, res, next) {
     const name = req.params.name;
-    const price = req.params.price;
-    const type = req.params.type;
-     new Item({name: name,price: price,type: type}).save( (err, data) => {
+    const  size = req.params.size;
+     new Category({name: name,size: size}).save( (err, data) => {
       if (err) {
         next(err);
       }
@@ -35,7 +34,7 @@ export default class ItemController {
 
   delete(req, res, next) {
     const id = req.params.id;
-    Item.delete({_id: id}, (err, data) => {
+    Category.delete({_id: id}, (err, data) => {
       if (err) {
         next(err);
       }
@@ -46,8 +45,8 @@ export default class ItemController {
 
   update(req, res, next){
     const id = req.params.id;
-    const price = req.params.price;
-    Item.delete({_id: id, price: price}, (err, data) => {
+    const size = req.params.size;
+    Category.delete({_id: id, size: size}, (err, data) => {
       if (err) {
         next(err);
       }
