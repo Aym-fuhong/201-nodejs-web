@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const itemSchema = new Schema({
   name: String,
   price: Number,
-  cartId: {type: Schema.ObjectId,ref: 'Cart'},
+  cartId: {type: [],ref: 'Cart'},
   categoryId: {type: Schema.ObjectId,ref: 'Category'}
 });
 
