@@ -22,8 +22,8 @@ export default class CartController {
   }
 
   save(req, res, next) {
-    const name = req.params.name;
-     new Cart({name:name}).save( (err, data) => {
+    const size = req.params.size;
+     new Cart({size:size}).save( (err, data) => {
       if (err) {
         next(err);
       }
@@ -44,8 +44,8 @@ export default class CartController {
 
   update(req, res, next){
     const id = req.params.id;
-    const weight = req.params.weight;
-    Cart.delete({_id: id, weight: weight}, (err, data) => {
+    const size = req.params.size;
+    Cart.delete({_id: id, size: size}, (err, data) => {
       if (err) {
         next(err);
       }

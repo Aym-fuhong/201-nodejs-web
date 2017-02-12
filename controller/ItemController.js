@@ -24,8 +24,7 @@ export default class ItemController {
   save(req, res, next) {
     const name = req.params.name;
     const price = req.params.price;
-    const type = req.params.type;
-     new Item({name: name,price: price,type: type}).save( (err, data) => {
+     new Item({name: name,price: price}).save( (err, data) => {
       if (err) {
         next(err);
       }

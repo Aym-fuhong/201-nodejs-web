@@ -22,9 +22,8 @@ export default class CategoryController {
   }
 
   save(req, res, next) {
-    const name = req.params.name;
-    const  size = req.params.size;
-     new Category({name: name,size: size}).save( (err, data) => {
+    const type = req.params.type;
+     new Category({type: type}).save( (err, data) => {
       if (err) {
         next(err);
       }
@@ -45,8 +44,8 @@ export default class CategoryController {
 
   update(req, res, next){
     const id = req.params.id;
-    const size = req.params.size;
-    Category.delete({_id: id, size: size}, (err, data) => {
+    const type = req.params.type;
+    Category.delete({_id: id, type: type}, (err, data) => {
       if (err) {
         next(err);
       }
