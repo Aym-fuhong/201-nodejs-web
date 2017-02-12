@@ -2,9 +2,7 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 const cartSchema = new Schema({
-  name: String,
-  weight: Number,
-  Items: {type: [],ref: 'Item'}
+  size: Number
 });
 
 module.exports = mongoose.model('Cart', cartSchema);

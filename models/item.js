@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const itemSchema = new Schema({
   name: String,
   price: Number,
-  categoryId: {type: Number,ref: 'Category'}
+  cartId: {type: Schema.ObjectId,ref: 'Cart'},
+  categoryId: {type: Schema.ObjectId,ref: 'Category'}
 });
 
 module.exports = mongoose.model('Item', itemSchema);
