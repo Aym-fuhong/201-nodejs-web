@@ -22,8 +22,7 @@ export default class CategoryController {
   }
 
   save(req, res, next) {
-    const type = req.params.type;
-     new Category({type: type}).save( (err, data) => {
+     new Category(req.body).save( (err, data) => {
       if (err) {
         next(err);
       }

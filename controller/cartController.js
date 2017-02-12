@@ -22,8 +22,7 @@ export default class CartController {
   }
 
   save(req, res, next) {
-    const size = req.params.size;
-     new Cart({size:size}).save( (err, data) => {
+     new Cart(req.body).save( (err, data) => {
       if (err) {
         next(err);
       }

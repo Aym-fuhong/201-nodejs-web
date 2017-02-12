@@ -22,9 +22,7 @@ export default class ItemController {
   }
 
   save(req, res, next) {
-    const name = req.params.name;
-    const price = req.params.price;
-     new Item({name: name,price: price}).save( (err, data) => {
+     new Item(req.body).save( (err, data) => {
       if (err) {
         next(err);
       }
