@@ -1,4 +1,4 @@
-import Cart from '../models/cart';
+import Cart from '../model/cart';
 
 export default class CartController {
 
