@@ -1,4 +1,4 @@
-import Cart from '../model/cart';
+const Cart = require('../model/cart');
 
 export default class CartController {
 

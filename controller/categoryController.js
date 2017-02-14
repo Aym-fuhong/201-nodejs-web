@@ -1,4 +1,4 @@
-import Category from '../model/category';
+const Category = require('../model/category');
 
 export default class CategoryController {
 

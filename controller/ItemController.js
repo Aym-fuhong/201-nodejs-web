@@ -1,4 +1,4 @@
-import Item from '../model/item';
+const Item = require('../model/item');
 
 export default class ItemController {
 
