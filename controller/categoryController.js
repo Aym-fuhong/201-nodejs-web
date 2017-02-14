@@ -1,4 +1,5 @@
 const Category = require('../model/category');
+const constant = require('../config/constant');
 
 export default class CategoryController {
 
@@ -7,7 +8,7 @@ export default class CategoryController {
       if(err) {
         next(err);
       }
-      res.status(200).send({category:data});
+      res.status(constant.httpCode.OK).send({category:data});
     })
     }
 
@@ -17,7 +18,7 @@ export default class CategoryController {
       if(err) {
         next(err);
       }
-      res.status(200).send({category:data});
+      res.status(constant.httpCode.OK).send({category:data});
     })
   }
 
@@ -26,7 +27,7 @@ export default class CategoryController {
       if (err) {
         next(err);
       }
-      res.sendStatus(201);
+      res.sendStatus(constant.httpCode.CREATED);
     })
   }
 
@@ -36,7 +37,7 @@ export default class CategoryController {
       if (err) {
         next(err);
       }
-      res.sendStatus(204);
+      res.sendStatus(constant.httpCode.NO_CONTENT);
     });
 
   }
@@ -48,7 +49,7 @@ export default class CategoryController {
       if (err) {
         next(err);
       }
-      res.sendStatus(204);
+      res.sendStatus(constant.httpCode.NO_CONTENT);
     });
   }
 }
