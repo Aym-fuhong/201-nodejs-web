@@ -1,7 +1,7 @@
 const Category = require('../model/category');
 const constant = require('../config/constant');
 
-export default class CategoryController {
+class CategoryController {
 
   getAll(req, res, next) {
     Category.find((err, data) => {
@@ -53,3 +53,4 @@ export default class CategoryController {
     });
   }
 }
+module.exports = CategoryController;

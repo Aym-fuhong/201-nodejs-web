@@ -1,7 +1,7 @@
 const Cart = require('../model/cart');
 const constant = require('../config/constant');
 
-export default class CartController {
+class CartController {
 
   getAll(req, res, next) {
     Cart.find((err, data) => {
@@ -53,3 +53,4 @@ export default class CartController {
     });
   }
 }
+module.exports = CartController;

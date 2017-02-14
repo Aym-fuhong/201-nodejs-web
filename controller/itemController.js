@@ -1,7 +1,7 @@
 const Item = require('../model/item');
 const constant = require('../config/constant');
 
-export default class ItemController {
+class ItemController {
 
   getAll(req, res, next) {
     Item.find((err, data) => {
@@ -53,3 +53,4 @@ export default class ItemController {
     });
   }
 }
+module.exports = ItemController;

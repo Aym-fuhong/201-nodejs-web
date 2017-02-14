@@ -11,4 +11,4 @@ router.post('/', cartCtrl.save);
 router.delete('/:id', cartCtrl.delete);
 router.put('/:id', cartCtrl.update);
 
-export default router;
+module.exports = router;
