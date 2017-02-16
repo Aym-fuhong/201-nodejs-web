@@ -4,26 +4,32 @@ const constant = require('../config/constant');
 class ItemController {
 
   getAll(req, res, next) {
-    Item.find((err, data) => {
+    Item.find({}, (err, data) => {
       if(err) {
         next(err);
+      }
+      if(!data) {
+        res.sendStatus(constant.httpCode.NOT_FOUND);
       }
       res.status(constant.httpCode.OK).send({item:data});
     })
     }
 
   getOne(req, res, next) {
-    const id = req.params.id;
-    Item.findOne({_id: id}, (err, data) => {
+    const itemId = req.params.id;
+    Item.findById(itemId, (err, data) => {
       if(err) {
         next(err);
+      }
+      if(!data) {
+        res.sendStatus(constant.httpCode.NOT_FOUND);
       }
       res.status(constant.httpCode.OK).send({item:data});
     })
   }
 
-  save(req, res, next) {
-     new Item(req.body).save( (err, data) => {
+  create(req, res, next) {
+     Item.create(req.body, (err, data) => {
       if (err) {
         next(err);
       }
@@ -32,10 +38,13 @@ class ItemController {
   }
 
   delete(req, res, next) {
-    const id = req.params.id;
-    Item.delete({_id: id}, (err, data) => {
+    const itemId = req.params.id;
+    Item.findByIdAndRemove(itemId, (err, data) => {
       if (err) {
         next(err);
+      }
+      if(!data) {
+        res.sendStatus(constant.httpCode.NOT_FOUND);
       }
       res.sendStatus(constant.httpCode.NO_CONTENT);
     });
@@ -43,11 +52,13 @@ class ItemController {
   }
 
   update(req, res, next){
-    const id = req.params.id;
-    const price = req.params.price;
-    Item.delete({_id: id, price: price}, (err, data) => {
+    const itemId = req.params.id;
+    Item.findByIdAndUpdate(itemId, req.body, (err, data) => {
       if (err) {
         next(err);
+      }
+      if(!data) {
+        res.sendStatus(constant.httpCode.NOT_FOUND);
       }
       res.sendStatus(constant.httpCode.NO_CONTENT);
     });

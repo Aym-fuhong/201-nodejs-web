@@ -8,22 +8,28 @@ class CategoryController {
       if(err) {
         next(err);
       }
+      if(!data) {
+        res.sendStatus(constant.httpCode.NOT_FOUND);
+      }
       res.status(constant.httpCode.OK).send({category:data});
     })
     }
 
   getOne(req, res, next) {
-    const id = req.params.id;
-    Category.findOne({_id: id}, (err, data) => {
+    const categoryId = req.params.id;
+    Category.findById(categoryId, (err, data) => {
       if(err) {
         next(err);
+      }
+      if(!data) {
+        res.sendStatus(constant.httpCode.NOT_FOUND);
       }
       res.status(constant.httpCode.OK).send({category:data});
     })
   }
 
-  save(req, res, next) {
-     new Category(req.body).save( (err, data) => {
+  create(req, res, next) {
+     Category.create(req.body, (err, data) => {
       if (err) {
         next(err);
       }
@@ -32,10 +38,13 @@ class CategoryController {
   }
 
   delete(req, res, next) {
-    const id = req.params.id;
-    Category.delete({_id: id}, (err, data) => {
+    const categoryId = req.params.id;
+    Category.findByIdAndRemove(categoryId, (err, data) => {
       if (err) {
         next(err);
+      }
+      if(!data) {
+        res.sendStatus(constant.httpCode.NOT_FOUND);
       }
       res.sendStatus(constant.httpCode.NO_CONTENT);
     });
@@ -43,11 +52,13 @@ class CategoryController {
   }
 
   update(req, res, next){
-    const id = req.params.id;
-    const type = req.params.type;
-    Category.delete({_id: id, type: type}, (err, data) => {
+    const categoryId = req.params.id;
+    Category.findByIdAndUpdate(categoryId, req.body, (err, data) => {
       if (err) {
         next(err);
+      }
+      if(!data) {
+        res.sendStatus(constant.httpCode.NOT_FOUND);
       }
       res.sendStatus(constant.httpCode.NO_CONTENT);
     });
