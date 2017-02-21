@@ -35,7 +35,7 @@ class CategoryController {
       if (err) {
         next(err);
       }
-      res.sendStatus(constant.httpCode.CREATED);
+      res.status(constant.httpCode.CREATED).send({uri:`Category/${data._id}`});
     })
   }
 

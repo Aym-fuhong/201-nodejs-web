@@ -33,7 +33,7 @@ class ItemController {
       if (err) {
         next(err);
       }
-      res.sendStatus(constant.httpCode.CREATED);
+      res.status(constant.httpCode.CREATED).send({uri:`Item/${data._id}`});
     })
   }
 

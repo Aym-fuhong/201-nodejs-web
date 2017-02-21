@@ -33,7 +33,7 @@ class CartController {
       if (err) {
         next(err);
       }
-      res.sendStatus(constant.httpCode.CREATED);
+      res.status(constant.httpCode.CREATED).send({uri: `cart/${data._id}`});
     })
   }
 
