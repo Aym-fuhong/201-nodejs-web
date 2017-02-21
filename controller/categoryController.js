@@ -15,9 +15,9 @@ class CategoryController {
       }
     }, (err, data) => {
       if (err) {
-        next(err);
+        return next(err);
       }
-      res.status(constant.httpCode.OK).send(data);
+      return res.status(constant.httpCode.OK).send(data);
     });
   }
 
@@ -25,21 +25,21 @@ class CategoryController {
     const categoryId = req.params.id;
     Category.findById(categoryId, (err, data) => {
       if (err) {
-        next(err);
+        return next(err);
       }
       if (!data) {
-        res.sendStatus(constant.httpCode.NOT_FOUND);
+        return res.sendStatus(constant.httpCode.NOT_FOUND);
       }
-      res.status(constant.httpCode.OK).send({category: data});
+      return res.status(constant.httpCode.OK).send({category: data});
     })
   }
 
   create(req, res, next) {
     Category.create(req.body, (err, data) => {
       if (err) {
-        next(err);
+        return next(err);
       }
-      res.status(constant.httpCode.CREATED).send({uri:`Category/${data._id}`});
+      return res.status(constant.httpCode.CREATED).send({uri: `Category/${data._id}`});
     })
   }
 
@@ -63,15 +63,15 @@ class CategoryController {
       }
     ], (err)=> {
       if (err === true) {
-        res.sendStatus(constant.httpCode.BAD_REQUEST);
+        return res.sendStatus(constant.httpCode.BAD_REQUEST);
       }
       if (err === false) {
-        res.sendStatus(constant.httpCode.NOT_FOUND);
+        return res.sendStatus(constant.httpCode.NOT_FOUND);
       }
       if (err) {
-        next(err);
+        return next(err);
       }
-      res.sendStatus(constant.httpCode.NO_CONTENT);
+      return res.sendStatus(constant.httpCode.NO_CONTENT);
     });
 
 
@@ -81,12 +81,12 @@ class CategoryController {
     const categoryId = req.params.id;
     Category.findByIdAndUpdate(categoryId, req.body, (err, data) => {
       if (err) {
-        next(err);
+        return next(err);
       }
       if (!data) {
-        res.sendStatus(constant.httpCode.NOT_FOUND);
+        return res.sendStatus(constant.httpCode.NOT_FOUND);
       }
-      res.sendStatus(constant.httpCode.NO_CONTENT);
+      return res.sendStatus(constant.httpCode.NO_CONTENT);
     });
   }
 }
