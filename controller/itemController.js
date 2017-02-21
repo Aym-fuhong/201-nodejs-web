@@ -1,31 +1,41 @@
 const Item = require('../model/item');
 const constant = require('../config/constant');
+const async = require('async');
 
 class ItemController {
 
   getAll(req, res, next) {
-    Item.find({}, (err, data) => {
-      if(err) {
-        next(err);
+    async.series({
+      items:(done) => {
+        Item.find({})
+            .populate('category')
+            .exec(done);
+      },
+      totalCount:(done) => {
+        Item.count(done);
       }
-      if(!data) {
-        res.sendStatus(constant.httpCode.NOT_FOUND);
+    }, (err, data) => {
+      if (err) {
+        return next(err);
       }
-      res.status(constant.httpCode.OK).send({item:data});
-    })
+      res.status(constant.httpCode.OK).send(data);
+    });
+
     }
 
   getOne(req, res, next) {
     const itemId = req.params.id;
-    Item.findById(itemId, (err, data) => {
-      if(err) {
-        next(err);
-      }
-      if(!data) {
-        res.sendStatus(constant.httpCode.NOT_FOUND);
-      }
-      res.status(constant.httpCode.OK).send({item:data});
-    })
+    Item.findById(itemId)
+        .populate('category')
+        .exec((err, data) => {
+          if(err) {
+            next(err);
+          }
+          if(!data) {
+            res.sendStatus(constant.httpCode.NOT_FOUND);
+          }
+          res.status(constant.httpCode.OK).send({item:data});
+        });
   }
 
   create(req, res, next) {
