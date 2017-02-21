@@ -6,15 +6,19 @@ const async = require('async');
 class CategoryController {
 
   getAll(req, res, next) {
-    Category.find((err, data) => {
+    async.series({
+      categories: (done) => {
+        Category.find({}, done);
+      },
+      totalCount: (done) => {
+        Category.count(done);
+      }
+    }, (err, data) => {
       if (err) {
         next(err);
       }
-      if (!data) {
-        res.sendStatus(constant.httpCode.NOT_FOUND);
-      }
-      res.status(constant.httpCode.OK).send({category: data});
-    })
+      res.status(constant.httpCode.OK).send(data);
+    });
   }
 
   getOne(req, res, next) {
