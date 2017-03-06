@@ -7,7 +7,7 @@ class CategoryController {
 
   getAll(req, res, next) {
     async.series({
-      categories: (done) => {
+      items: (done) => {
         Category.find({}, done);
       },
       totalCount: (done) => {

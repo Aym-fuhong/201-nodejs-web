@@ -8,11 +8,11 @@ const mapItemToUri = (items) => {
   });
 };
 
-class CartController {
+class CartController{
 
   getAll(req, res, next) {
     async.series({
-      carts: (done) => {
+      items: (done) => {
         Cart.find({}, (err, data) => {
           if (err) {
             return done(err);
